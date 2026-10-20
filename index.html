@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="브라우저에서 안전하게 EML 이메일 파일을 열어보는 로컬 뷰어">
+  <title>우편함 · EML Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="우편함 홈">
+      <span class="brand-mark" aria-hidden="true">✉</span>
+      <span><b>우편함</b><small>EML VIEWER</small></span>
+    </a>
+    <div class="privacy"><span></span> 파일은 이 브라우저에서만 처리됩니다</div>
+  </header>
+
+  <main>
+    <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+      <div class="eyebrow">PRIVATE · LOCAL · SIMPLE</div>
+      <h1 id="welcome-title">잠든 메일을<br><em>다시 펼쳐보세요.</em></h1>
+      <p class="intro">보관해 둔 .eml 파일을 올려보세요. 메일 내용과 첨부파일을 서버 전송 없이, 이 브라우저 안에서만 정리해 드립니다.</p>
+      <label id="dropzone" class="dropzone" for="file-input">
+        <input id="file-input" type="file" accept=".eml,message/rfc822" hidden>
+        <span class="drop-icon" aria-hidden="true">↧</span>
+        <span><strong>EML 파일을 여기에 놓으세요</strong><small>또는 클릭해서 파일 선택 · 최대 50MB</small></span>
+      </label>
+      <button id="sample-button" class="sample-button" type="button">예시 메일로 먼저 둘러보기 <span>→</span></button>
+      <div class="features" aria-label="주요 기능">
+        <article><b>01</b><span><strong>완전한 프라이버시</strong><small>파일이 기기 밖으로 나가지 않아요.</small></span></article>
+        <article><b>02</b><span><strong>첨부파일까지 한눈에</strong><small>원본 그대로 확인하고 저장하세요.</small></span></article>
+        <article><b>03</b><span><strong>다양한 메일 지원</strong><small>HTML, 텍스트, 다국어 메일을 읽어요.</small></span></article>
+      </div>
+    </section>
+
+    <section id="viewer" class="viewer" hidden aria-live="polite">
+      <div class="viewer-toolbar" aria-label="뷰어 도구">
+        <button id="open-another" class="open-another" type="button">＋ 다른 파일 열기</button>
+        <div class="file-card"><span class="file-badge">EML</span><div><b id="file-name"></b><small id="file-size"></small></div></div>
+        <nav class="view-nav" aria-label="메일 보기 방식">
+          <button class="active" data-view="message" type="button"><span>▤</span> 메일 보기</button>
+          <button data-view="raw" type="button"><span>&lt;/&gt;</span> 원문 보기</button>
+        </nav>
+        <div class="toolbar-actions">
+          <button id="print-button" type="button">⌁ 인쇄 / PDF 저장</button>
+          <p><span></span> 로컬에서 안전하게 열림</p>
+        </div>
+      </div>
+
+      <article class="mail-panel">
+        <div id="message-view">
+          <div class="mail-actions"><span id="date-full"></span><button id="close-button" type="button" aria-label="메일 닫기">×</button></div>
+          <h2 id="subject"></h2>
+          <div class="people">
+            <div id="avatar" class="avatar"></div>
+            <div class="sender"><b id="from-name"></b><small id="from-address"></small></div>
+            <button id="details-toggle" class="details-toggle" type="button" aria-expanded="false">상세 정보⌄</button>
+          </div>
+          <dl id="details" class="details" hidden></dl>
+          <div id="body-tabs" class="body-tabs" hidden>
+            <button data-body="html" class="active" type="button">HTML</button><button data-body="text" type="button">텍스트</button>
+          </div>
+          <div id="image-options" class="image-options"><label><input id="remote-images" type="checkbox"> 외부 이미지 불러오기</label><small>메일에 포함된 이미지는 자동 표시합니다. 외부 이미지를 켜면 이미지 서버에 접속하며, 삭제되었거나 로그인이 필요한 이미지는 표시되지 않을 수 있습니다.</small></div>
+          <div id="mail-body" class="mail-body"></div>
+          <section id="attachments" class="attachments" hidden>
+            <h3>첨부파일 <span id="attachment-count"></span></h3>
+            <div id="attachment-list"></div>
+          </section>
+        </div>
+        <div id="raw-view" class="raw-view" hidden><div><h2>메일 원문</h2><button id="copy-raw" type="button">복사</button></div><p class="raw-help">첨부파일 데이터가 포함된 긴 원문은 32KB씩 나누어 표시합니다. 복사 버튼은 전체 원문을 복사합니다.</p><nav class="raw-pagination" aria-label="원문 페이지"><button id="raw-prev" type="button">← 이전</button><span id="raw-page-info" role="status"></span><button id="raw-next" type="button">다음 →</button></nav><pre id="raw-content" tabindex="0" aria-label="현재 페이지 원문"></pre></div>
+      </article>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <footer>MADE FOR QUIET INBOXES <span>✦</span> YOUR MAIL STAYS YOURS</footer>
+  <script src="app.js"></script>
+</body>
+</html>
