@@ -14,12 +14,6 @@
 - 원문 32KB 페이지 표시, 전체 원문 복사
 - 인쇄 / PDF 저장
 
-## GitHub에 올리기
-1. 새 저장소를 만드세요.
-2. 이 폴더의 index.html, app.js, styles.css, README.md, .gitignore를 저장소 루트에 올리세요.
-3. Code > Download ZIP으로 받은 뒤 index.html을 열면 실행됩니다.
-4. 웹 주소도 필요하면 Settings > Pages > Deploy from a branch에서 main, /(root)를 선택하세요.
-
 ## 개인정보
 EML 파일은 브라우저에서 처리하며 서버에 업로드하지 않습니다.
 외부 이미지 불러오기를 켜면 이미지 서버에 접속하며 수신 확인 요청이 발생할 수 있습니다.
